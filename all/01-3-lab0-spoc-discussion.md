@@ -79,11 +79,22 @@ SETGATE(intr, 1,2,3,0);
 
 1. 请在ucore中找一段你认为难度适当的AT&T格式X86汇编代码，尝试解释其含义。
 
+
+```
+ lgdt gdtdesc
+ movl %cr0, %eax
+ orl $CR0_PE_ON, %eax
+ movl %eax, %cr0
+```
+ 从16位实模式转换到保护模式。lgdt指令将GDT入口存储到gdtdesc；接着修改cr0寄存器的值，得出虚拟地址。
+
 2. (option)请在rcore中找一段你认为难度适当的RV汇编代码，尝试解释其含义。
 
 #### 练习二
 
 宏定义和引用在内核代码中很常用。请枚举ucore或rcore中宏定义的用途，并举例描述其含义。
+
+利用宏进行数据结构中的数据访问；进行类型转换；简化代码；
 
 #### reference
  - [Intel格式和AT&T格式汇编区别](http://www.cnblogs.com/hdk1993/p/4820353.html)
