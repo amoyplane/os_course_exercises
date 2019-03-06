@@ -29,7 +29,7 @@ UEFI（统一可扩展固件接口，Unified Extensible Firmware Interface）是
 
 - 理解rcore中的Berkeley BootLoader (BBL)的功能。
 
-
+工作在H Mode，提供底层IO接口。
 
 ## 3.2 系统启动流程
 
@@ -43,7 +43,7 @@ UEFI（统一可扩展固件接口，Unified Extensible Firmware Interface）是
 
 - RV中BBL的启动过程大致包括哪些内容？
 
-
+建立DTB设备树，跳转入内核态。
 
 ## 3.3 中断、异常和系统调用比较
 - 什么是中断、异常和系统调用？
@@ -77,9 +77,11 @@ UEFI（统一可扩展固件接口，Unified Extensible Firmware Interface）是
 
 - 通过分析x86中函数调用规范以及`int`、`iret`、`call`和`ret`的指令准确功能和调用代码，比较x86中函数调用与系统调用的堆栈操作有什么不同？
 
-
+call和ret是函数调用，只会将返回地址压栈、弹出；int和iret是系统调用，会使用额外的栈并存储处理器相关信息。
 
 - 通过分析RV中函数调用规范以及`ecall`、`eret`、`jal`和`jalr`的指令准确功能和调用代码，比较x86中函数调用与系统调用的堆栈操作有什么不同？
+
+jal和jalr是函数调用，只需保存跳转地址到寄存器中跳转即可；ecall和eret时系统会先保存现场，并将相关信息保存在协处理器中，eret时恢复相关状态。
 
 
 ## 课堂实践 （在课堂上根据老师安排完成，课后不用做）
