@@ -5,17 +5,33 @@
 
 1. 进程切换的可能时机有哪些？
 
+时间片用完；  被抢占；  等待事件；  运行结束；  
+
 2. 分析ucore的进程切换代码，说明ucore的进程切换触发时机和进程切换的判断时机都有哪些。
 
+schedule，proc_run，switch_to  
+
 3. ucore的进程控制块数据结构是如何组织的？主要字段分别表示什么？
+
+arch_proc_struct
+mm_struct
+need_resched
+wait_state
+run_link、list_link、hash_link
 
 ### 12.2 进程创建
 
 1. fork()的返回值是唯一的吗？父进程和子进程的返回值是不同的。请找到相应的赋值代码。
 
+不唯一。
+
 2. 新进程创建时的进程标识是如何设置的？请指明相关代码。
 
+get)pid();
+
 3. 请通过fork()的例子中进程标识的赋值顺序说明进程的执行顺序。
+
+
 
 4. 请在ucore启动时显示空闲进程（idleproc）和初始进程（initproc）的进程标识。
 
